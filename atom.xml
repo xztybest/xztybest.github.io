@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>风花雪月</title>
+  
+  
+  <link href="http://xztybest.github.io/atom.xml" rel="self"/>
+  
+  <link href="http://xztybest.github.io/"/>
+  <updated>2020-10-01T03:14:06.043Z</updated>
+  <id>http://xztybest.github.io/</id>
+  
+  <author>
+    <name>天韵</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>如何探测CDN网络背后真实的IP地址</title>
+    <link href="http://xztybest.github.io/2020/09/30/%E5%A6%82%E4%BD%95%E6%8E%A2%E6%B5%8BCDN%E7%BD%91%E7%BB%9C%E8%83%8C%E5%90%8E%E7%9C%9F%E5%AE%9E%E7%9A%84IP%E5%9C%B0%E5%9D%80/"/>
+    <id>http://xztybest.github.io/2020/09/30/%E5%A6%82%E4%BD%95%E6%8E%A2%E6%B5%8BCDN%E7%BD%91%E7%BB%9C%E8%83%8C%E5%90%8E%E7%9C%9F%E5%AE%9E%E7%9A%84IP%E5%9C%B0%E5%9D%80/</id>
+    <published>2020-09-30T02:47:34.000Z</published>
+    <updated>2020-10-01T03:14:06.043Z</updated>
+    
+    <content type="html"><![CDATA[<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;nbspCDN(Content delivery network）内容分发网络，<br><br>通常来说就是同一个域名对应多个服务器或者服务器集群。像百度之类的网站，只有一个域名，但是服务器却有很<br><br>多个，每次访问，这个CDN技术就会将离你最近的百度服务器中的内容分发给你，从而提高了效率，这样也能分担<br><br>被攻击的风险。</p><a id="more"></a><h3>探测方案<h3><ol><li><h4>查询DNS历史记录</h4><br><p>可以通过查询IP地址与域名的绑定记录，公网IP地址比较好查询，如果你使用的NAT上网就需要ISP提供支持才<br>能够有效查询</p><p><a href="https://dnsdb.io/zh-cn/">这里推荐一个查询网址</a></p></li><li><h4>子域名查找法</h4><p>因为cdn和反向代理是需要成本的，有的网站只在比较常用的域名使用cdn或反向代理，有的时候一些测试子域<br>名和新的子域名都没来得及加入cdn和反向代理，所以有时候是通过查找子域名来查找网站的真实IP。可以通过各类<br>扫描子域名的工具来查找子域名并解析ip地址，例如子域名挖掘机，sublist3r等。</p></li><li><h4>nslookup方法</h4><p>大部分CDN提供商只针对国内市场，而对国外市场几乎是不做CDN，所以有很大的几率会直接解析到真实IP。<br>其实这个方法根本不用上国外vpn，因为你上国外vpn的ping本质，就是使用国外dns（那台vpn服务器使用的dns）<br>查询域名而已，所以只需要：nslookup http://xxx.com 国外dns，就行了，例如：nslookup http://xxx.com 8.8.8.8<br>，提示：你要找冷门国外DNS才行，像谷歌的DNS，国内用的人越来越多了，很多CDN提供商都把谷歌DNS作为国内<br>市场之一，所以，你查到的结果会和国内差不了多少。或者查询域名的NS记录，其域名记录中的MX记录，TXT记录等<br>很有可能指向的是真实ip或同C段服务器</p></li><li><h4>ping方法</h4><p>ping 具体的URL即https://xxx.xx.com/xx这个类型的东西，这个方法比直接ping www.baidu.com之类的更具体唯一<br>所以可能会爆破真实的IP地址</p></li><li><h4>网站漏洞查找方法</h4><p>通过网站的信息泄露如phpinfo泄露，github信息泄露，命令执行等漏洞获取真实IP</p></li><li><h4>网站订阅邮件方法</h4><p>可以通过网站订阅邮件的功能，让网站给自己发邮件（如注册时，会发送邮件），查看邮件源代码即可获取网站真实IP。</p></li></ol><p>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p><p>@copy;天韵</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;amp;nbspCDN(Content delivery network）内容分发网络，&lt;br&gt;&lt;br&gt;通常来说就是同一个域名对应多个服务器或者服务器集群。像百度之类的网站，只有一个域名，但是服务器却有很&lt;br&gt;&lt;br&gt;多个，每次访问，这个CDN技术就会将离你最近的百度服务器中的内容分发给你，从而提高了效率，这样也能分担&lt;br&gt;&lt;br&gt;被攻击的风险。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="渗透测试" scheme="http://xztybest.github.io/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
+    
+    <category term="DNS" scheme="http://xztybest.github.io/tags/DNS/"/>
+    
+    <category term="IP探测" scheme="http://xztybest.github.io/tags/IP%E6%8E%A2%E6%B5%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>SHE(SEH)</title>
+    <link href="http://xztybest.github.io/2020/09/30/SHE-SEH/"/>
+    <id>http://xztybest.github.io/2020/09/30/SHE-SEH/</id>
+    <published>2020-09-30T01:47:56.000Z</published>
+    <updated>2020-09-30T03:14:35.693Z</updated>
+    
+    <content type="html"><![CDATA[<p>SEH是Windows操作系统的默认异常处理机制</p><a id="more"></a><ul><li><h3>SEH</h3></li><li>SHE是Windows的默认异常处理机制，在程序源代码中使用_try,_except,_finally关键字来实现.</li><li>在你想分析中，SEH除了基本的异常处理功能外，还大量用于反调试程序(这里SEH时保存在栈中的，漏洞利用的时候会用到)</li></ul><ul><li><h3>OS异常处理的办法</h3></li><li><h4>正常运行时候的异常处理办法</h4><p>进程运行过程中若发生异常，OS会委托进程进行处理。若进程代码中存在具体的异常处理<br>（如SEH异常处理器）代码，则能够顺利处理相关异常，程序继续运行，但如果进程内部没<br>有具体实现SEH，那么相关异常就无法处理，OS就会启动默认的异常处理机制，终止进程运行</p></li><li><h4>调试运行时的异常处理方法</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;被调试的进程内部发生异常，OS会首先把异常抛给调试<br>进程处理。调器拥有被调试者的所有权限。被调试者内部发生的异常都由调试器处理。调试<br>过程中的所有异常都先由调试器管理。被调试者发生异常时，调试器会停止运行，必须采取<br>相应的措施来处理异常，完成后续的调试。遇到异常的时候的处理方法如下。</p><ul><li>直接修改异常：代码、寄存器、内存</li><li>将异常抛给被调试程序，使用od的shift+f7/f8/f9直接将异常抛还给被调试者</li><li>OS默认异常处理机制</li></ul></li></ul><p>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p><p>@copy;天韵</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;SEH是Windows操作系统的默认异常处理机制&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="Winodows" scheme="http://xztybest.github.io/tags/Winodows/"/>
+    
+    <category term="异常处理" scheme="http://xztybest.github.io/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ESP定律原理</title>
+    <link href="http://xztybest.github.io/2020/09/29/ESP%E5%AE%9A%E5%BE%8B%E5%8E%9F%E7%90%86/"/>
+    <id>http://xztybest.github.io/2020/09/29/ESP%E5%AE%9A%E5%BE%8B%E5%8E%9F%E7%90%86/</id>
+    <published>2020-09-29T11:07:35.000Z</published>
+    <updated>2020-09-30T03:15:07.559Z</updated>
+    
+    <content type="html"><![CDATA[<p>详情见<a href="https://zhuanlan.zhihu.com/p/117294551">ESP定律原理相关知识</a></p><p>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p><p>@copy;天韵</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;详情见&lt;a href=&quot;https://zhuanlan.zhihu.com/p/117294551&quot;&gt;ESP定律原理相关知识&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。&lt;/p&gt;
+&lt;p&gt;@copy;天韵&lt;/p&gt;</summary>
+      
+    
+    
+    
+    
+    <category term="脱壳" scheme="http://xztybest.github.io/tags/%E8%84%B1%E5%A3%B3/"/>
+    
+    <category term="逆向" scheme="http://xztybest.github.io/tags/%E9%80%86%E5%90%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何在Windows 或者Linux中隐藏进程</title>
+    <link href="http://xztybest.github.io/2020/09/29/%E5%A6%82%E4%BD%95%E5%9C%A8Windows-%E6%88%96%E8%80%85Linux%E4%B8%AD%E9%9A%90%E8%97%8F%E8%BF%9B%E7%A8%8B/"/>
+    <id>http://xztybest.github.io/2020/09/29/%E5%A6%82%E4%BD%95%E5%9C%A8Windows-%E6%88%96%E8%80%85Linux%E4%B8%AD%E9%9A%90%E8%97%8F%E8%BF%9B%E7%A8%8B/</id>
+    <published>2020-09-29T11:06:54.000Z</published>
+    <updated>2020-09-30T03:16:43.959Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://jingyan.baidu.com/article/4d58d54150d0009dd4e9c0ae.html">进程隐藏</a></p><p>著作权归作者所有,商业转载请联系作者，非商业转载请注明出处</p><p>@copy;天韵</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;&lt;a href=&quot;https://jingyan.baidu.com/article/4d58d54150d0009dd4e9c0ae.html&quot;&gt;进程隐藏&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;著作权归作者所有,商业转载请联系作者，非商业转载请注明出处&lt;/p&gt;
+&lt;p&gt;@copy;天韵&lt;/</summary>
+      
+    
+    
+    
+    
+    <category term="渗透测试" scheme="http://xztybest.github.io/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
+    
+    <category term="Windows" scheme="http://xztybest.github.io/tags/Windows/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>网络开发中的几种IO复用模式</title>
+    <link href="http://xztybest.github.io/2020/09/29/%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8DIO%E5%A4%8D%E7%94%A8%E6%A8%A1%E5%BC%8F/"/>
+    <id>http://xztybest.github.io/2020/09/29/%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8DIO%E5%A4%8D%E7%94%A8%E6%A8%A1%E5%BC%8F/</id>
+    <published>2020-09-29T11:06:03.000Z</published>
+    <updated>2020-09-30T03:16:59.271Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://blog.csdn.net/qq_45132647/article/details/107741585">三种复用模式</a><br>转自<a href="https://blog.csdn.net/qq_45132647/article/details/107741585">https://blog.csdn.net/qq_45132647/article/details/107741585</a></p><p>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p><p>@copy;天韵</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/qq_45132647/article/details/107741585&quot;&gt;三种复用模式&lt;/a&gt;&lt;br&gt;转自&lt;a href=&quot;https://blog.csdn.net/qq_45132647/article/</summary>
+      
+    
+    
+    
+    
+    <category term="网络开发" scheme="http://xztybest.github.io/tags/%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91/"/>
+    
+    <category term="编程" scheme="http://xztybest.github.io/tags/%E7%BC%96%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Windows GS安全机制和原理</title>
+    <link href="http://xztybest.github.io/2020/09/29/Windows-GS%E5%AE%89%E5%85%A8%E6%9C%BA%E5%88%B6%E5%92%8C%E5%8E%9F%E7%90%86/"/>
+    <id>http://xztybest.github.io/2020/09/29/Windows-GS%E5%AE%89%E5%85%A8%E6%9C%BA%E5%88%B6%E5%92%8C%E5%8E%9F%E7%90%86/</id>
+    <published>2020-09-29T11:05:20.000Z</published>
+    <updated>2020-09-30T03:15:51.239Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://blog.csdn.net/m0_37809075/article/details/82973151">Windows GS安全机制和原理</a></p><p>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p><p>@copy;天韵</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/m0_37809075/article/details/82973151&quot;&gt;Windows GS安全机制和原理&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。&lt;/p&gt;
+</summary>
+      
+    
+    
+    
+    
+    <category term="信息安全" scheme="http://xztybest.github.io/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/"/>
+    
+    <category term="Windows" scheme="http://xztybest.github.io/tags/Windows/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>同源策略</title>
+    <link href="http://xztybest.github.io/2020/09/29/%E5%90%8C%E6%BA%90%E7%AD%96%E7%95%A5/"/>
+    <id>http://xztybest.github.io/2020/09/29/%E5%90%8C%E6%BA%90%E7%AD%96%E7%95%A5/</id>
+    <published>2020-09-29T11:04:11.000Z</published>
+    <updated>2020-09-30T03:16:51.496Z</updated>
+    
+    <content type="html"><![CDATA[<p>同源策略 是由NetScape提出的一个著名的安全策略。所谓的同源，指的是协议，域名，<br>端口相同。浏览器处于安全方面的考虑，只允许本域名下的接口交互，不同源的客户端脚本，<br>在没有明确授权的情况下，不能读写对方的资源。</p><a id="more"></a><p>设想这样一种情况：A网站是一家银行，用户登录以后，又去浏览其他的网站，如果其他网<br>站可以读取A网站的Cookie,会发生什么？很显然，如果Cookie包含隐私（比如存款总额），这些<br>信息就会泄漏。更可怕的是Cookie往往用来保存用于的登录状态，如果用户没有退出登录，其他<br>网站就可以冒充用户为所欲为，因为浏览器同时还规定，提交表单不受同源策略的限制。<br>由此可见，同源策略是必须的。如果非同源，那么在请求数据时，浏览器会在控制台中报一个异常，<br>提示拒绝访问。</p><p>转自https://www.jianshu.com/p/d37a3b23b35c</p><p>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p><p>@copy;天韵</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;同源策略 是由NetScape提出的一个著名的安全策略。所谓的同源，指的是协议，域名，&lt;br&gt;
+端口相同。浏览器处于安全方面的考虑，只允许本域名下的接口交互，不同源的客户端脚本，&lt;br&gt;
+在没有明确授权的情况下，不能读写对方的资源。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="安全策略" scheme="http://xztybest.github.io/tags/%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python的魔术方法和用法</title>
+    <link href="http://xztybest.github.io/2020/09/29/Python%E7%9A%84%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%92%8C%E7%94%A8%E6%B3%95/"/>
+    <id>http://xztybest.github.io/2020/09/29/Python%E7%9A%84%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%92%8C%E7%94%A8%E6%B3%95/</id>
+    <published>2020-09-29T11:03:26.000Z</published>
+    <updated>2020-09-30T03:15:37.804Z</updated>
+    
+    <content type="html"><![CDATA[<p>请参考<br><a href="https://blog.csdn.net/houzeyu666/article/details/82423528">Python的魔术方法和用法</a></p><p>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p><p>@copy;天韵</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;请参考&lt;br&gt;&lt;a href=&quot;https://blog.csdn.net/houzeyu666/article/details/82423528&quot;&gt;Python的魔术方法和用法&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。&lt;/</summary>
+      
+    
+    
+    
+    
+    <category term="Python" scheme="http://xztybest.github.io/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CRLF注入原理</title>
+    <link href="http://xztybest.github.io/2020/09/29/CRLF%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86/"/>
+    <id>http://xztybest.github.io/2020/09/29/CRLF%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86/</id>
+    <published>2020-09-29T11:01:36.000Z</published>
+    <updated>2020-09-30T03:14:51.681Z</updated>
+    
+    <content type="html"><![CDATA[<p>1、CRLF的意思就是回车(CR, ASCII 13, \r)换行(LF, ASCII 10, \n)。CR、LF分别对应回车（%0d）、换行（%0a）字符.<br>这两个ACSII字符不会在屏幕有任何输出，但在Windows中广泛使用来标识一行的结束。而在Linux/UNIX系统<br>中只有换行符。CR和LF组合在一起即CRLF命令，它表示键盘上的"Enter"键。</p><a id="more"></a><p><h3>CRLF注入原理</h3>在HTTP协议中，HTTP Header与HTTP Body是用两个CRLF分隔的，浏览器就是根据这两个CRLF来取出HTTP<br>内容并显示出来。所以，一旦我们能够控制HTTP消息头中的字符，注入一些恶意的换行，这样我们就能注入一<br>些会话Cookie或者HTML代码，所以CRLF Injection又叫HTTP Response Splitting，简称HRS。</p><p><h3>防御</h3>限制用户输入的CR和LF，或者对CR和LF字符正确编码后再输出，以防止注入自定义HTTP头。<br>方案2.查看：HTTP响应拆分漏洞(CRLF注入攻击漏洞)解决办法 （感谢“黄克业”提供以上解决方案）-PHP语言的解决方案：<br>这种现象往往表现在带有参数传递的网页，只要合理的过滤好就OK啦，PHP语言的一些过滤方法:<br><div class="highlight-box"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><figcaption><span>[PHP正则表达式过滤] [lang:php]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$post &#x3D; trim($post);</span><br><span class="line">$post &#x3D; strip_tags($post,&quot;&quot;); &#x2F;&#x2F;清除HTML等代码</span><br><span class="line">$post &#x3D; ereg_replace(&quot;\t&quot;,&quot;&quot;,$post); &#x2F;&#x2F;去掉制表符号</span><br><span class="line">$post &#x3D; ereg_replace(&quot;\r\n&quot;,&quot;&quot;,$post); &#x2F;&#x2F;去掉回车换行符号$post &#x3D; ereg_replace(&quot;\r&quot;,&quot;&quot;,$post); &#x2F;&#x2F;去掉回车$post &#x3D; ereg_replace(&quot;\n&quot;,&quot;&quot;,$post); &#x2F;&#x2F;去掉换行$post &#x3D; ereg_replace(&quot; &quot;,&quot;&quot;,$post); &#x2F;&#x2F;去掉空格$post &#x3D; ereg_replace(&quot;&#39;&quot;,&quot;&quot;,$post); &#x2F;&#x2F;去掉单引号</span><br></pre></td></tr></table></figure></div><br>就是要对用户的输入进行严格控制，去掉不必要的危险字符</p><p>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p><p>@copy;天韵</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;1、CRLF的意思
+就是回车(CR, ASCII 13, \r)换行(LF, ASCII 10, \n)。CR、LF分别对应回车（%0d）、换行（%0a）字符.&lt;br&gt;
+这两个ACSII字符不会在屏幕有任何输出，但在Windows中广泛使用来标识一行的结束。而在Linux/UNIX系统&lt;br&gt;
+中只有换行符。CR和LF组合在一起即CRLF命令，它表示键盘上的&quot;Enter&quot;键。
+&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="渗透测试" scheme="http://xztybest.github.io/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>DDOS的攻击方式有哪几种</title>
+    <link href="http://xztybest.github.io/2020/09/29/DDOS%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D/"/>
+    <id>http://xztybest.github.io/2020/09/29/DDOS%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D/</id>
+    <published>2020-09-29T11:00:57.000Z</published>
+    <updated>2020-09-30T03:14:59.941Z</updated>
+    
+    <content type="html"><![CDATA[<p>DDOS又叫分布式拒绝服务攻击，通过大量互联网流量压倒目标或其周围的基础架构来破<br>坏目标服务器，服务或网络的正常流量。这会让目标服务器失去对外服务的功能，对企业的<br>数据和业务运营都有着非常巨大的影响，目前没有根除的方式，只能够尽最大可能进行防御<br>，减少响应的损失<br></p><a id="more"></a><p><h3>分类</h3><ul><li>应用层攻击:HTTP FLOOD;有时被称为第7层DDoS攻击（参考OSI模型的第7层），这些攻<br>击的目标是耗尽目标的资源。攻击的目标是在服务器上生成网页并响应HTTP请求而传递的层。<br>单个HTTP请求在客户端执行起来很便宜，并且目标服务器响应起来可能很昂贵，因为服务器通<br>常必须加载多个文件并运行数据库查询才能创建网页。第7层攻击难以防御，因为流量很难被标<br>记为恶意攻击。</li><li>协议层攻击:SYN FLOOD;协议攻击（也称为状态耗尽攻击）通过消耗Web应用程序服务器<br>或防火墙和负载平衡器等中间资源的所有可用状态表容量来导致服务中断。协议攻击利用协议<br>栈的第3层和第4层中的弱点来使目标不可访问。</li><li>容量攻击:此类攻击试图通过消耗目标与较大Internet之间的所有可用带宽来创建拥塞。通过<br>使用放大形式或其他创建大量流量的方式（例如来自僵尸网络的请求）将大量数据发送到目标。<br>DNS放大就是其中一个例子</li></ul></p><p><h3>防御方式</h3><ul><li>黑洞布线，将攻击流量引入预设好的线路</li><li>限速</li><li>Web应用防火墙</li><li>任意波扩散</li><li>限制连接数量</li></ul></p><p>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p><p>@copy;天韵</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;DDOS又叫分布式拒绝服务攻击，通过大量互联网流量压倒目标或其周围的基础架构来破&lt;br&gt;
+坏目标服务器，服务或网络的正常流量。这会让目标服务器失去对外服务的功能，对企业的&lt;br&gt;
+数据和业务运营都有着非常巨大的影响，目前没有根除的方式，只能够尽最大可能进行防御&lt;br&gt;
+，减少响应的损失&lt;br&gt;
+&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="渗透测试" scheme="http://xztybest.github.io/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
+    
+    <category term="信息安全" scheme="http://xztybest.github.io/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>黑客常用痕迹清除方式及对应监控方法</title>
+    <link href="http://xztybest.github.io/2020/09/29/%E9%BB%91%E5%AE%A2%E5%B8%B8%E7%94%A8%E7%97%95%E8%BF%B9%E6%B8%85%E9%99%A4%E6%96%B9%E5%BC%8F%E5%8F%8A%E5%AF%B9%E5%BA%94%E7%9B%91%E6%8E%A7%E6%96%B9%E6%B3%95/"/>
+    <id>http://xztybest.github.io/2020/09/29/%E9%BB%91%E5%AE%A2%E5%B8%B8%E7%94%A8%E7%97%95%E8%BF%B9%E6%B8%85%E9%99%A4%E6%96%B9%E5%BC%8F%E5%8F%8A%E5%AF%B9%E5%BA%94%E7%9B%91%E6%8E%A7%E6%96%B9%E6%B3%95/</id>
+    <published>2020-09-29T11:00:05.000Z</published>
+    <updated>2020-09-30T03:16:08.560Z</updated>
+    
+    <content type="html"><![CDATA[<p>：a.可以清除远程计算机的日志**先用ipc连接上去: net use\ipipc$密码/user:用户名**然后开始清除:方法clearlogs\ip-app这<br>个是清除远程计算机的应用程序日志clearlogs\ip-sec这个是清除远程计算机的 </p><a id="more"></a><p>Windows方法 <br>    clearlogs \ip -app这个是清除远程计算机的应用程序日志   clearlogs \ip -sec这个是清<br>  除远程计算机的安全日志   clearlogs \ip -sys这个是清除远程计算机的系统日志<br>    b.清除本机日志:如果和远程计算机的不能空连接.那么就需要把这个工具传到远程计<br>  算机上面   然后清除.方法:  clearlogs -app这个是清除远程计算机的应用程序日志 <br>    clearlogs -sec这个是清除远程计算机的安全日志   clearlogs -sys这个是清除远程计算机的系统日志   安全日志已经被清除.Success: The log has been cleared成功.  为了更安全一点.同样你也可以建立<br>  一个批处理文件.让自动清除.做好批处理文件.然后用at命令建立一个计划任务.让自动运行.之后你就可以离开你的肉鸡了.<br>    例如建立一个c.bat<br>   rem ==============================开始 <br>    @echo off  clearlogs -app  clearlogs -sec  clearlogs -sys  del clearlogs.exe  del c.bat  exit<br>    rem ==============================结束  <br>  <p>你的计算机上面测试的时候 可以不要@echo off可以显示出来.你可以看到结果<br><br>  第一行表示:运行时不显示窗口   第二行表示:清除应用程序日志   第三行表示:清除安全日志   第四行表示:清除系统日志 <br><br>  第五行表示:删除clearlogs.exe这个工具   第六行表示:删除c.bat这个批处理文件   第七行表示:退出 <br><br>用AT命令.建立一个计划任务.这个命令在原来的教程里面和杂志里面都有.你可以去看看详细的使用方法   AT时间c:c.bat<br><br>  之后你就可以安全离开了.这样才更安全一点. </p></p><p>Linux方法<br>直接清楚日志文件具体应用和系统请自行查阅</p><p><h3>防御方法</h3><br>将日志分等级存放，重要日志文件按存放到远程服务器，并做好时间限制和备份工作。</p><p>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p><p>@copy;天韵</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;：a.可以清除远程计算机的日志**先用ipc连接上去: net use
+\ipipc$密码/user:用户名**然后开始清除:方法clearlogs\ip-app这&lt;br&gt;
+个是清除远程计算机的应用程序日志clearlogs\ip-sec这个是清除远程计算机的 
+&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="渗透测试" scheme="http://xztybest.github.io/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
+    
+    <category term="黑客" scheme="http://xztybest.github.io/tags/%E9%BB%91%E5%AE%A2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>0day应急响应流程</title>
+    <link href="http://xztybest.github.io/2020/09/29/0day%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E6%B5%81%E7%A8%8B/"/>
+    <id>http://xztybest.github.io/2020/09/29/0day%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E6%B5%81%E7%A8%8B/</id>
+    <published>2020-09-29T09:49:11.000Z</published>
+    <updated>2020-09-30T03:14:43.749Z</updated>
+    
+    <content type="html"><![CDATA[<p>什么是0day漏洞，就是漏洞首次被发现，除了发现者及其所属组织，其它任何人和组织都不知道的漏洞。<br>信息安全意义上的0Day是指在系统商在知晓并发布相关补丁前就被掌握或者公开的漏洞信息。详情见更多</p><a id="more"></a><h3>应急响应流程</h3><ul><li>评估0day漏洞对系统和影响，判断漏洞级别</li><li>分析POC，收集数据和信息</li><li>根据漏洞级别进行预案处理，如果没有相关预案则上报安全研究部门对漏洞进行研究</li><li>出具处理方案并测试处理的效果</li><li>研发补丁程序</li><li>发布补丁</li><li>公布漏洞，记录入库</li></ul><p>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p><p>@copy;天韵</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;什么是0day漏洞，就是漏洞首次被发现，除了发现者及其所属组织，其它任何人和组织都不知道的漏洞。&lt;br&gt;
+信息安全意义上的0Day是指在系统商在知晓并发布相关补丁前就被掌握或者公开的漏洞信息。详情见更多&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="渗透测试" scheme="http://xztybest.github.io/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
+    
+    <category term="响应流程" scheme="http://xztybest.github.io/tags/%E5%93%8D%E5%BA%94%E6%B5%81%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>恶意DNS</title>
+    <link href="http://xztybest.github.io/2020/09/29/%E6%81%B6%E6%84%8FDNS/"/>
+    <id>http://xztybest.github.io/2020/09/29/%E6%81%B6%E6%84%8FDNS/</id>
+    <published>2020-09-29T09:19:58.000Z</published>
+    <updated>2020-09-30T03:16:00.138Z</updated>
+    
+    <content type="html"><![CDATA[<p>信息安全关乎每个人，恶意的DNS可能会让你的信息泄漏，常见的产生原因和解决方案请点击更多</p><a id="more"></a><p><h3>产生的原因</h3><br><ul><li>1.和别人处在同意局域网中或者共用DNS服务器和路由器，一旦里面的服务器或者路由器受损就会导<br>致相同的情况发生</li><li>2.设置了未知的代理，可能是恶意软件修改，也可能是自己收到社会学攻击而自行修改的</li><li>3.电脑中了病毒</li></ul><p><p><h3>解决方案</h3><br><ul><li>安装可信度高的专业查杀检测软件，普通人建议使用免费版本</li><li>定期更新病毒库及时打补丁</li><li>设置固定的DNS，并用软件锁死，防止修改，检测任何修改dns的行为</li><li>不要下载使用任何文件(软件，普通文件)</li><li>在不明白原因的情况下尽量不要相信他人的建议，不要让他人随意使用你的电脑，要指导他做了什么</li><li>不要使用无法确定是否安全的代理</li></ul></p><p>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p><p>@copy;天韵</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;信息安全关乎每个人，恶意的DNS可能会让你的信息泄漏，常见的产生原因和解决方案请点击更多&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="信息安全" scheme="http://xztybest.github.io/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/"/>
+    
+    <category term="DNS" scheme="http://xztybest.github.io/tags/DNS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>java的一些外部编译及解决方案</title>
+    <link href="http://xztybest.github.io/2020/09/27/java%E7%9A%84%E4%B8%80%E4%BA%9B%E5%A4%96%E9%83%A8%E7%BC%96%E8%AF%91%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
+    <id>http://xztybest.github.io/2020/09/27/java%E7%9A%84%E4%B8%80%E4%BA%9B%E5%A4%96%E9%83%A8%E7%BC%96%E8%AF%91%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</id>
+    <published>2020-09-27T04:09:15.000Z</published>
+    <updated>2020-09-30T03:15:16.925Z</updated>
+    
+    <content type="html"><![CDATA[<p>网上一大堆说了这个问题，就是漏了高板本这个问题，也许是用编译器的原因吧，大家都没有注意</p><a id="more"></a><p>java在非IDEA或者其它编译条件下可能回出现编译通过,<br>却无法执行的情况，javac可以顺利通过，但是java xx.class却无法通过.<br>通常出现找不到加载类的问题，解决方案，java xxx去掉.class,<br>二由于版本问题，高版本可以直接java xx.java这可能就是高版本的优势，<br>节省了自己编译的时间，可以提高程序员的编译效率。如果对您有帮助，希<br>能够给个打赏，毕竟研究不易。</p><p>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p><p>@copy;天韵</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;网上一大堆说了这个问题，就是漏了高板本这个问题，也许是用编译器的原因吧，大家都没有注意&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="java" scheme="http://xztybest.github.io/tags/java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>java序列化应该注意的问题</title>
+    <link href="http://xztybest.github.io/2020/09/23/java%E5%BA%8F%E5%88%97%E5%8C%96%E5%BA%94%E8%AF%A5%E6%B3%A8%E6%84%8F%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+    <id>http://xztybest.github.io/2020/09/23/java%E5%BA%8F%E5%88%97%E5%8C%96%E5%BA%94%E8%AF%A5%E6%B3%A8%E6%84%8F%E7%9A%84%E9%97%AE%E9%A2%98/</id>
+    <published>2020-09-23T02:45:26.000Z</published>
+    <updated>2020-09-30T03:15:29.188Z</updated>
+    
+    <content type="html"><![CDATA[<p>如果要将java对象进行序列化存储就必须继承；</p><div class="highlight-box"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><figcaption><span>[java] [lang:java]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import java.io.Serializable;</span><br><span class="line">public class name implements Serializable,,,,,</span><br></pre></td></tr></table></figure></div><p>否则程序将会认定该对象类为不可序列化类从而导致序列化失败。</p><p>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p><p>@copy;天韵</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;如果要将java对象进行序列化存储就必须继承；&lt;/p&gt;
+&lt;div class=&quot;highlight-box&quot;autocomplete=&quot;off&quot; autocorrect=&quot;off&quot; autocapitalize=&quot;off&quot; spellcheck=&quot;false&quot; conten</summary>
+      
+    
+    
+    
+    
+    <category term="java" scheme="http://xztybest.github.io/tags/java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>缓冲区漏洞溢出危害</title>
+    <link href="http://xztybest.github.io/2020/09/11/%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BC%8F%E6%B4%9E%E6%BA%A2%E5%87%BA%E5%8D%B1%E5%AE%B3/"/>
+    <id>http://xztybest.github.io/2020/09/11/%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BC%8F%E6%B4%9E%E6%BA%A2%E5%87%BA%E5%8D%B1%E5%AE%B3/</id>
+    <published>2020-09-11T14:29:19.000Z</published>
+    <updated>2020-09-30T03:16:16.926Z</updated>
+    
+    <content type="html"><![CDATA[<p>缓冲区溢出问题普遍存在，危害可达可小，预防方法可以查看我的其它博客。</p><a id="more"></a><p>主要说一下危害，其可能导致程序运行失败（主要影响相关业务),系统宕机重启等后果,系统权限丢失，<br>进而导致服务器信息泄漏。原理由于图灵机理论奠定了计算机的基础，所以现在的计算机基本都是这个原理<br>。图灵机的指令和数据没有完全分开，在程序执行的时候，如果输入的数据过大（编程问题或者黑客故意伪<br>造的数据包)就会导致存放数据的区域存储不够用，而覆盖指令区域。经过特殊构造的数据包在填满数据区后<br>就会覆盖指令区，而覆盖的指令区数据就是攻击者构造的指令，当程序运行时就会执行该指令（一般为shell<br>也就是相当于远程控制端程序，只要程序不停，远程控制就会一直存活)这样服务器就会被控制,所以要定期检<br>查系统中的威胁，不必要的连接和持续长事件的固定连接和数据传输.</p><p>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p><p>@copy;天韵</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;缓冲区溢出问题普遍存在，危害可达可小，预防方法可以查看我的其它博客。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="信息安全" scheme="http://xztybest.github.io/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>无线网络安全行为规范</title>
+    <link href="http://xztybest.github.io/2020/09/11/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%A1%8C%E4%B8%BA%E8%A7%84%E8%8C%83/"/>
+    <id>http://xztybest.github.io/2020/09/11/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%A1%8C%E4%B8%BA%E8%A7%84%E8%8C%83/</id>
+    <published>2020-09-11T14:03:30.000Z</published>
+    <updated>2020-09-30T03:17:07.510Z</updated>
+    
+    <content type="html"><![CDATA[<p>   使用新的WIFI时候应该注意是否为伪造的WIFI（可以使用安全软件扫描确定)</p><a id="more"></a><p>如果在公共环境无线网络存在不能稳定情况，请立即断开无线网络，绑定MAC地址和IP地址，<br>如果在公共环境无线网络存在不能稳定情况，请立即断开无线网络，绑定MAC地址和IP地址，<br>只允许特定用户介入网络。设置随机密码，可以用小本本记住。没有绝对的安全，<br>但是要做到以上要求就能最大可能保证安全，毕竟懂渗透的都是少数人。</p><p>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p><p>@copy;天韵</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;   使用新的WIFI时候应该注意是否为伪造的WIFI（可以使用安全软件扫描确定)&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="信息安全" scheme="http://xztybest.github.io/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/"/>
+    
+    <category term="无线网络" scheme="http://xztybest.github.io/tags/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何防止内存泄露</title>
+    <link href="http://xztybest.github.io/2020/09/09/%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2/"/>
+    <id>http://xztybest.github.io/2020/09/09/%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2/</id>
+    <published>2020-09-09T06:40:53.000Z</published>
+    <updated>2020-09-30T03:16:25.133Z</updated>
+    
+    <content type="html"><![CDATA[  <p>编程的时候对输入和输出都应该进行严格的数据大小限制，使用带<br>有内存保护机制的平台进行编译，尽量使用动态变化的大小。</p><p>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p><p>@copy;天韵</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">  &lt;p&gt;编程的时候对输入和输出都应该进行严格的数据大小限制，使用带&lt;br&gt;有内存保护机制的平台进行编译，尽量使用动态变化的大小。&lt;/p&gt;
+&lt;p&gt;著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。&lt;/p&gt;
+&lt;p&gt;@copy;天韵&lt;/p&gt;</summary>
+      
+    
+    
+    
+    
+    <category term="信息安全" scheme="http://xztybest.github.io/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/"/>
+    
+    <category term="编程安全" scheme="http://xztybest.github.io/tags/%E7%BC%96%E7%A8%8B%E5%AE%89%E5%85%A8/"/>
+    
+  </entry>
+  
+</feed>
